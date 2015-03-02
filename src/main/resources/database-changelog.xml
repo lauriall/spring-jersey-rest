@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="lauria">
+        <createTable tableName="USER">
+            <column name="ID" type="java.sql.Types.BIGINT">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="EMAIL" type="VARCHAR(50)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addUniqueConstraint tableName="USER" constraintName="UNIQUE_EMAIL" columnNames="EMAIL" />
+        
+        <createSequence sequenceName="SEQ_USER" />
+
+        <createTable tableName="ROLE">
+            <column name="ID" type="java.sql.Types.BIGINT">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="USER_ID" type="java.sql.Types.BIGINT" />
+            <column name="ROLE" type="VARCHAR(50)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="SEQ_ROLE" />
+
+        <addForeignKeyConstraint constraintName="FK_ROLE" baseTableName="ROLE" baseColumnNames="USER_ID"
+                                 referencedTableName="USER" referencedColumnNames="ID"/>
+    </changeSet>
+
+</databaseChangeLog>
