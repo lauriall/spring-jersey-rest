@@ -9,15 +9,7 @@ public class Role {
     private Long userId;
     private String role;
 
-    public Role() {}
-
     public Role(String role) {
-        this.role = role;
-    }
-
-    public Role(Long id, Long userId, String role) {
-        this.id = id;
-        this.userId = userId;
         this.role = role;
     }
 
